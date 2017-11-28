@@ -33,7 +33,7 @@ public class ZtreeDemoController {
             sourcejson,String targetjson)throws  IOException{
 
          PrintWriter out = response.getWriter();
-         List<Map<String,Object>> sourcejsons = JSONArray.toList(JSONArray.fromObject(sourcejson));// 首先把字符串转成 list  对象
+         List<Map<String,Object>> sourcejsons =(List<Map<String,Object>>) JSONArray.toCollection(JSONArray.fromObject(sourcejson),Map.class);// 首先把字符串转成 list  对象
          Map<String,Object> targetjsons = JSONObject.fromObject(targetjson);
          List<Map> inser = new ArrayList<>();
  /*        for(Map<String,Object> source : sourcejsons){
