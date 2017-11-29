@@ -8,7 +8,14 @@
 
         SELECT  * FROM  ztreedemo
 
-
     </select>
+    
+    <insert id="insertZtreeDemo" parameterType="java.util.HashMap"
+            useGeneratedKeys="true" keyProperty="id"  >
+
+        INSERT INTO ztreedemo  (name,parent_id,parent_ids,avaialble)
+         VALUES (#{name},#{parent_id},#{parent_ids},#{avaialble})
+
+    </insert>
 
 </mapper>

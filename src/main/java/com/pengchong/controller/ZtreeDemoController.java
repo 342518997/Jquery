@@ -36,17 +36,20 @@ public class ZtreeDemoController {
          List<Map<String,Object>> sourcejsons =(List<Map<String,Object>>) JSONArray.toCollection(JSONArray.fromObject(sourcejson),Map.class);// 首先把字符串转成 list  对象
          Map<String,Object> targetjsons = JSONObject.fromObject(targetjson);
          List<Map> inser = new ArrayList<>();
- /*        for(Map<String,Object> source : sourcejsons){
-             Map<String,Object> maps = new HashMap<>();
-             maps.putAll(source);
-             maps.put("parent_id",targetjsons.get("id"));
-             maps.put("avaialble",true);
-             maps.put("parent_ids",targetjsons.get("parent_ids")+ (String) maps.get("parent_id")+"/" );
-             inser.add(maps);
+         //如果是文件
+        if(sourcejsons.size()==1) {
+            for (Map<String, Object> source : sourcejsons) {
+                Map<String, Object> maps = new HashMap<>();
+                maps.put("name", source.get("name"));
+                maps.put("parent_id", targetjsons.get("id"));
+                maps.put("avaialble", true);
+                maps.put("parent_ids", targetjsons.get("parent_ids") + String.valueOf(maps.get("parent_id")) + "/");
+                //插入记录返回主键
+                 this.ztreeDemoService.insertZtreeDemo(maps) ;
+            }
+        }else if (sourcejsons.size()>1){//如果是文件夹
 
-         }*/
-         Map<String,Object> map = (Map<String, Object>) sourcejsons.get(0);
-
+        }
          out.print(true);
 
     }

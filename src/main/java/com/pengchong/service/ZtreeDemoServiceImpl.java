@@ -18,4 +18,11 @@ public class ZtreeDemoServiceImpl implements  ZtreeDemoService{
     public List<Map> findZtreeDemo() {
         return ztreeDemoMapper.findZtreeDemo();
     }
+
+    @Override
+    public int insertZtreeDemo(Map<String, Object> map) {
+        this.ztreeDemoMapper.insertZtreeDemo(map);
+        Number num = (Number)map.get("id");
+        return  num.intValue();
+    }
 }

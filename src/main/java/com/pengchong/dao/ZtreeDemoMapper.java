@@ -11,5 +11,5 @@ public interface ZtreeDemoMapper {
 
       List<Map> findZtreeDemo ();
 
-      ZtreeDemo findById(String id);
+      int insertZtreeDemo(Map<String , Object> map);
 }

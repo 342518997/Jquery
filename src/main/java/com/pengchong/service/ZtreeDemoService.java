@@ -6,4 +6,6 @@ import java.util.Map;
 public interface ZtreeDemoService {
 
     List<Map> findZtreeDemo ();
+
+    int insertZtreeDemo(Map<String , Object> map);
 }
