@@ -48,7 +48,17 @@ public class ZtreeDemoController {
                  this.ztreeDemoService.insertZtreeDemo(maps) ;
             }
         }else if (sourcejsons.size()>1){//如果是文件夹
-
+            Map<String, Object> root = new HashMap<>();
+            root.put("name", sourcejsons.get(0).get("name"));
+            root.put("parent_id", targetjsons.get("id"));
+            root.put("avaialble", true);
+            root.put("parent_ids", targetjsons.get("parent_ids") + String.valueOf(root.get("parent_id")) + "/");
+            //插入记录返回主键
+            int rootid = this.ztreeDemoService.insertZtreeDemo(root) ;
+            sourcejsons.remove(0);
+            for (Map<String, Object> source : sourcejsons) {
+                    
+            }
         }
          out.print(true);
 

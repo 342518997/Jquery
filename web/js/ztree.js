@@ -42,34 +42,17 @@ var setting = {
 
             //如果拖拽的是目录 判断是否有子节点
             if(treeNodes[0].isParent){
+                var s1=new Array();
                 //遍历子节点数据集合
+                s1.push(treeNodes[0]);
                 $.each(treeNodes[0].children,function(i,treeNode){
-                    alert("【源节点】子节点"+i+":"+treeNode.id+"  父节点id:"+treeNode.parent_id+"  级层："+treeNode.level+"  名称："+treeNode.name);
+                    /*alert("【源节点】子节点"+i+":"+treeNode.id+"  父节点id:"+treeNode.parent_id+"  级层："+treeNode.level+"  名称："+treeNode.name);*/
+                    s1.push(treeNode);
                 });
+                ztreeisCopy("/replication",s1,targetNode);
             }else {
 
-                $.ajax({
-                    url:"/replication",
-                    dataType:"json",
-                    data:{"sourcejson":JSON.stringify(treeNodes) ,"targetjson":JSON.stringify(targetNode) },
-                    type:"POST",
-                    success:function(data){
-                        if(JSON.stringify(data)){
-/*                            alert("复制菜单成功.");*/
-                            //以下代码实现重置树
-                            var treeObj = $.fn.zTree.getZTreeObj("treeDemo");//根据 treeId 获取 zTree 对象
-                            treeObj.expandAll(true);//折叠全部节点,参数为true时表示展开全部节点
-                            treeObj.refresh();//刷新zTree，实现不选中任何节点
-
-                        }else {
-                            alert("复制失败.");
-                        }
-
-                    }
-
-                });
-
-
+                ztreeisCopy("/replication",treeNodes,targetNode);
                 /*alert("【源节点】节点id:"+treeNodes[0].id+"  父节点id:"+treeNodes[0].parent_id+"  级层："+treeNodes[0].level+"  名称："+treeNodes[0].name);*/
             }
 
@@ -110,4 +93,26 @@ function test(event, treeId, treeNode){
 }
 function on(event, treeId, treeNode) {
     alert(treeNode.name);
+}
+function ztreeisCopy(url,treeNodes,targetNode){
+    $.ajax({
+        url:url,
+        dataType:"json",
+        data:{"sourcejson":JSON.stringify(treeNodes) ,"targetjson":JSON.stringify(targetNode) },
+        type:"POST",
+        success:function(data){
+            if(JSON.stringify(data)){
+                                            alert("复制菜单成功.");
+                //以下代码实现重置树
+                var treeObj = $.fn.zTree.getZTreeObj("treeDemo");//根据 treeId 获取 zTree 对象
+                treeObj.expandAll(true);//折叠全部节点,参数为true时表示展开全部节点
+                treeObj.refresh();//刷新zTree，实现不选中任何节点
+
+            }else {
+                alert("复制失败.");
+            }
+
+        }
+
+    });
 }
