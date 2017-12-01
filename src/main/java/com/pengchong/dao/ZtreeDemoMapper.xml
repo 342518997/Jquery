@@ -17,5 +17,11 @@
          VALUES (#{name},#{parent_id},#{parent_ids},#{avaialble})
 
     </insert>
+    
+    <select id="isthereachildnode"  parameterType="java.lang.Integer" resultType="int">
+        select COUNT(1) from ztreedemo where parent_ids LIKE
+        concat(concat('%',#{id}),'%')
+
+    </select>
 
 </mapper>

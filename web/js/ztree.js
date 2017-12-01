@@ -42,14 +42,8 @@ var setting = {
 
             //如果拖拽的是目录 判断是否有子节点
             if(treeNodes[0].isParent){
-                var s1=new Array();
-                //遍历子节点数据集合
-                s1.push(treeNodes[0]);
-                $.each(treeNodes[0].children,function(i,treeNode){
-                    /*alert("【源节点】子节点"+i+":"+treeNode.id+"  父节点id:"+treeNode.parent_id+"  级层："+treeNode.level+"  名称："+treeNode.name);*/
-                    s1.push(treeNode);
-                });
-                ztreeisCopy("/replication",s1,targetNode);
+
+                ztreeisCopy("/replication",treeNodes[0],targetNode);
             }else {
 
                 ztreeisCopy("/replication",treeNodes,targetNode);

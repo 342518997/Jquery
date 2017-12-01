@@ -25,4 +25,13 @@ public class ZtreeDemoServiceImpl implements  ZtreeDemoService{
         Number num = (Number)map.get("id");
         return  num.intValue();
     }
+
+    @Override
+    public boolean isthereachildnode(Integer id) {
+       int  row =   this.ztreeDemoMapper.isthereachildnode(id);
+       if(row >0 ){
+          return  true;
+       }
+        return false;
+    }
 }

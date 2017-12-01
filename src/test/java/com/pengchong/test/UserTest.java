@@ -19,8 +19,10 @@ public class UserTest {
         ApplicationContext context = new
                 ClassPathXmlApplicationContext("classpath:spring-config.xml");
         ZtreeDemoMapper testMapper =  context.getBean("ztreeDemoMapper",ZtreeDemoMapper.class);
-        List<Map> maps = testMapper.findZtreeDemo();
-        System.out.println(maps.size());
+ /*       List<Map> maps = testMapper.findZtreeDemo();
+        System.out.println(maps.size());*/
+       int  a=  testMapper.isthereachildnode(3);
+        System.out.println(a);
   }
     @Test
     public void insert(){

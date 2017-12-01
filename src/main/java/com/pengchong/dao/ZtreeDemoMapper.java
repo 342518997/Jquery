@@ -12,4 +12,6 @@ public interface ZtreeDemoMapper {
       List<Map> findZtreeDemo ();
 
       int insertZtreeDemo(Map<String , Object> map);
+
+      int isthereachildnode(Integer id);
 }
