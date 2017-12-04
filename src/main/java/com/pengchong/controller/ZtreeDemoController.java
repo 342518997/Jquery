@@ -33,8 +33,8 @@ public class ZtreeDemoController {
             sourcejson,String targetjson)throws  IOException{
 
          PrintWriter out = response.getWriter();
-        /* List<Map<String,Object>> sourcejsons =(List<Map<String,Object>>) JSONArray.toCollection(JSONArray.fromObject(sourcejson),Map.class);// 首先把字符串转成 list  对象*/
-         List<Map<String,Object>> sourcejsons = null;
+         List<Map<String,Object>> sourcejsons =(List<Map<String,Object>>) JSONArray.toCollection(JSONArray.fromObject(sourcejson),Map.class);// 首先把字符串转成 list  对象
+         /*List<Map<String,Object>> sourcejsons = null;*/
          Map<String,Object> targetjsons = JSONObject.fromObject(targetjson);
          List<Map<String,Object>> lists = directory(sourcejsons,targetjsons);
          out.print(true);
@@ -45,6 +45,7 @@ public class ZtreeDemoController {
     public List<Map<String,Object>> directory(List<Map<String ,Object>> sourcejsons,Map<String,Object> targetjsons){
         List<Map<String ,Object>>  Copiedmenu =  new ArrayList<>();
         List<Map<String,Object>>   Copiedmenu1=  new ArrayList<>();
+        List<Map<String,Object>>   Copiedmenu2=  new ArrayList<>();
 
         for (int i = 0 ; i<sourcejsons.size(); i++){
               Number num = (Number)sourcejsons.get(i).get("id");
@@ -65,7 +66,8 @@ public class ZtreeDemoController {
                             }
 
                         }
-                        Copiedmenu = Copiedmenu1;
+                        Copiedmenu.addAll(Copiedmenu1);
+                        Copiedmenu1.clear();
                     }else{
                         //文件夹
                         Map<String,Object> map = new HashMap<>();
@@ -77,10 +79,11 @@ public class ZtreeDemoController {
                         int id =  this.ztreeDemoService.insertZtreeDemo(map);
                         map.put("id",id);
                         map.put("qid",sourcejsons.get(i).get("id"));
-                        Copiedmenu.add(map);
                         Copiedmenu1.add(map);
 
                     }
+                    Copiedmenu.addAll(Copiedmenu1);
+                    Copiedmenu1.clear();
 
                 }else{
                     //文件
@@ -101,12 +104,13 @@ public class ZtreeDemoController {
                                  int id =  this.ztreeDemoService.insertZtreeDemo(map);
                                  map.put("id",id);
                                  map.put("qid",sourcejsons.get(i).get("id"));
-                                 Copiedmenu1.add(map);
+                                 Copiedmenu2.add(map);
 
                              }
 
                         }
-                        Copiedmenu = Copiedmenu1;
+                        Copiedmenu.addAll(Copiedmenu2);
+                        Copiedmenu2.clear();
                     }
 
                 }

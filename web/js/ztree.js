@@ -42,8 +42,9 @@ var setting = {
 
             //如果拖拽的是目录 判断是否有子节点
             if(treeNodes[0].isParent){
-
-                ztreeisCopy("/replication",treeNodes[0],targetNode);
+                var ids = [];
+                var treeNode =  getChildren(ids,treeNodes[0]);
+                ztreeisCopy("/replication",treeNode,targetNode);
             }else {
 
                 ztreeisCopy("/replication",treeNodes,targetNode);
@@ -109,4 +110,16 @@ function ztreeisCopy(url,treeNodes,targetNode){
         }
 
     });
+}
+
+//ids是一个数组 返回结果json数组     treeNode是选中的节点
+function getChildren(ids,treeNode){
+    var temp = {"id" : treeNode.id, "name" : treeNode.name,"parent_id":treeNode.parent_id,"parent_ids":treeNode.parent_ids,"avaialble":treeNode.avaialble};
+    ids.push(temp);
+    if (treeNode.isParent){
+        for(var obj in treeNode.children){
+            getChildren(ids,treeNode.children[obj]);
+        }
+    }
+    return ids;
 }
