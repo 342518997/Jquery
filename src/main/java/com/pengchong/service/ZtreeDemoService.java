@@ -10,4 +10,6 @@ public interface ZtreeDemoService {
     int insertZtreeDemo(Map<String , Object> map);
 
     boolean isthereachildnode(Integer id);
+
+    boolean rename(String id ,String name);
 }

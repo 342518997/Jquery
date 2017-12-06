@@ -132,4 +132,15 @@ public class ZtreeDemoController {
 
         return  maps;
     }
+
+   //重命名
+    @RequestMapping("/rename")
+    public void  rename(HttpServletResponse response,String id,String name) throws IOException {
+                /* 设置格式为text/json    */
+        response.setContentType("text/json");
+        /*设置字符集为'UTF-8'*/
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter out = response.getWriter();
+        out.print(JSONArray.fromObject(ztreeDemoService.rename(id,name)).toString());
+    }
 }

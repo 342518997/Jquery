@@ -14,4 +14,6 @@ public interface ZtreeDemoMapper {
       int insertZtreeDemo(Map<String , Object> map);
 
       int isthereachildnode(Integer id);
+
+      boolean rename(String id ,String name);
 }

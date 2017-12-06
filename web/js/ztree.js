@@ -42,10 +42,16 @@ var setting = {
 
             //如果拖拽的是目录 判断是否有子节点
             if(treeNodes[0].isParent){
+                if(targetNode == null || targetNode == ""){
+                    targetNode = {"id" : "0" ,"parent_ids" : ""};
+                }
                 var ids = [];
                 var treeNode =  getChildren(ids,treeNodes[0]);
                 ztreeisCopy("/replication",treeNode,targetNode);
             }else {
+                if(targetNode == null || targetNode == ""){
+                    targetNode = {"id" : "0" ,"parent_ids" : ""};
+                }
 
                 ztreeisCopy("/replication",treeNodes,targetNode);
                 /*alert("【源节点】节点id:"+treeNodes[0].id+"  父节点id:"+treeNodes[0].parent_id+"  级层："+treeNodes[0].level+"  名称："+treeNodes[0].name);*/
@@ -62,7 +68,22 @@ var setting = {
             return true;
         },
         onCheck:test,
-        onClick:on
+        onClick:on,
+        beforeRename:function (treeId, treeNode,newName, isCancel) {
+            $.ajax({
+                url:"/rename",
+                Type:"post",
+                data:{"id":treeNode.id,"name":newName},
+                dataType:"json",
+                success:function (data) {
+                    if (JSON.stringify(data)){
+                        alert("重名成功!");
+                    }else{
+                        alert("失败!");
+                    }
+                }
+            });
+        }
 
     }
 

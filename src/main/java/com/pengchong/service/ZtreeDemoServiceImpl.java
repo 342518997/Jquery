@@ -34,4 +34,9 @@ public class ZtreeDemoServiceImpl implements  ZtreeDemoService{
        }
         return false;
     }
+
+    @Override
+    public boolean rename(String id, String name) {
+        return this.ztreeDemoMapper.rename(id,name);
+    }
 }

@@ -23,5 +23,8 @@
         concat(concat('%',#{id}),'%')
 
     </select>
+ <update id="rename" parameterType="java.lang.String">
+   update ztreedemo set `name` =#{1} where id = #{0}
 
+ </update>
 </mapper>
