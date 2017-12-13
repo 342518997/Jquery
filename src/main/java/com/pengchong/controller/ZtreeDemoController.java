@@ -92,7 +92,7 @@ public class ZtreeDemoController {
                        Copiedmenu.add(map);
                         Copiedmenu1.add(map);
                     }
-                    if(Copiedmenu.size() >1){
+                    if(Copiedmenu.size() >0){
                         for (Map<String,Object> c : Copiedmenu){
                              if(c.get("qid").equals(sourcejsons.get(i).get("parent_id"))){
                                  Map<String,Object> map = new HashMap<>();
